@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Project, ProApprove
+from .models import Project, ProApprove, Fund
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -19,4 +19,13 @@ class ProApproveSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = ProApprove
+        fields = '__all__'
+
+
+class FundSerializer(serializers.ModelSerializer):
+    """
+    资金申请
+    """
+    class Meta:
+        model = Fund
         fields = '__all__'

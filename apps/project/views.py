@@ -4,8 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from project.models import Project, ProApprove
-from project.serializers import ProjectSerializer, ProApproveSerializer
+from project.models import Project, ProApprove, Fund
+from project.serializers import ProjectSerializer, ProApproveSerializer, FundSerializer
 
 
 class DefaultPagination(PageNumberPagination):
@@ -15,8 +15,7 @@ class DefaultPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class ProJectViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
-                     mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class ProJectViewset(viewsets.ModelViewSet):
     """
     list:
         项目列表
@@ -27,18 +26,27 @@ class ProJectViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Cr
     """
     # permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     # authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
-    queryset = Project.objects.all()
+    queryset = Project.objects.filter(is_deleted=0).all()
     pagination_class = DefaultPagination
     serializer_class = ProjectSerializer
-
 
 
 class ProApproveViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     项目和成员对应表
     """
-    queryset = ProApprove.objects.all()
+    queryset = ProApprove.objects.filter(is_deleted=0).all()
     serializer_class = ProApproveSerializer
+
+
+class FundViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    资金申请
+    """
+    queryset = Fund.objects.filter(is_deleted=0).all()
+    serializer_class = FundSerializer
+
+
 
 
 
