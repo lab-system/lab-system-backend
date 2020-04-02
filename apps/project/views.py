@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from project.models import Project, ProApprove, Fund
-from project.serializers import ProjectSerializer, ProApproveSerializer, FundSerializer
+from project.serializers import ProjectSerializer, ProApproveSerializer, FundSerializer, CreateOrUpdateProjectSerializer
 
 
 class DefaultPagination(PageNumberPagination):
@@ -30,8 +30,13 @@ class ProJectViewset(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
     serializer_class = ProjectSerializer
 
+    def get_serializer_class(self):
+        if self.action == 'create' or self.action == 'update':
+            return CreateOrUpdateProjectSerializer
+        return ProjectSerializer
 
-class ProApproveViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+
+class ProApproveViewSet(viewsets.ModelViewSet):
     """
     项目和成员对应表
     """

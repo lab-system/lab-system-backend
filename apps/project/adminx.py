@@ -6,7 +6,8 @@ from .models import *
 
 
 class ProjectAdmin(object):
-    list_display = ["name", "leader", "create_time"]
+    list_display = ["name", "leader", "create_time", "users"]
+    search_fields = ["name"]
 
 
 class ProApproveAdmin(object):

@@ -114,7 +114,6 @@ class UserProfile(AbstractUser):
     stuId = models.IntegerField(verbose_name='学号', help_text='学号', null=True, blank=True)
 
     # 用户注册时我们要新建user_profile 但是我们只有手机号
-    name = models.CharField(max_length=30, null=True, blank=True, verbose_name="姓名")
     cname = models.CharField(verbose_name="姓名", help_text='姓名', max_length=30, null=True, blank=True)
     # 保存出生日期，年龄通过出生日期推算
     birthday = models.DateField(null=True, blank=True, verbose_name="出生年月")

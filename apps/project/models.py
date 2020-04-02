@@ -9,9 +9,15 @@ class Project(BaseModel):
     项目团队
     """
 
-    PROJECT_STATUS = (
+    FINISH_STATUS = (
         (False, '未完成'),
         (True, '已完成'),
+    )
+
+    PROJECT_STATUS = (
+        (0, '待审核'),
+        (1, '审核通过'),
+        (2, '驳回'),
     )
 
     name = models.CharField('项目名称', help_text='项目名称', max_length=128)
@@ -19,13 +25,14 @@ class Project(BaseModel):
     users = models.ManyToManyField(UserProfile, verbose_name='项目成员', help_text='项目成员', blank=True,
                                    through='ProApprove') #反查参加的项目
     is_full = models.BooleanField('人员名额已满', help_text='人员名额已满', default=False)
-    is_finish = models.BooleanField('已完成', choices=PROJECT_STATUS, help_text='已完成', default=False)
+    is_finish = models.BooleanField('已完成', choices=FINISH_STATUS, help_text='已完成', default=False)
     plan = models.IntegerField('进度', help_text='进度', default=0)
     start_t = models.DateField('开始时间', help_text='开始时间', blank=True, null=True)
     end_t = models.DateField('结束时间', help_text='结束时间', blank=True, null=True)
     leader = models.ForeignKey(UserProfile, verbose_name='项目负责人', help_text='项目负责人', on_delete=models.CASCADE,
                                blank=True, null=True, related_name='lead_project')
-    is_active = models.BooleanField('激活状态', help_text='激活状态', default=True) #是否显示，删除直接讲这个字段改为false
+    status = models.IntegerField('状态', help_text='状态', default=0, choices=PROJECT_STATUS)
+    reject_reason = models.TextField('驳回原因', help_text='驳回原因', blank=True, null=True)
 
     class Meta:
         ordering = ['-create_time']
@@ -51,7 +58,7 @@ class Project(BaseModel):
 
     @property
     def money(self):
-        finds = self.finding_set.all()
+        finds = self.fund_set.all()
         return sum([find.num for find in finds])
 
     def __str__(self):
@@ -62,9 +69,16 @@ class ProApprove(BaseModel):
     """
     审核状态
     """
-    project = models.ForeignKey(Project, verbose_name='项目', on_delete=models.CASCADE, blank=True, null=True)
-    user = models.ForeignKey(UserProfile, verbose_name='成员', on_delete=models.CASCADE)
-    status = models.IntegerField('状态', default=2, choices=((0, u'不通过'), (1, u'通过'), (2, u'等待'),))
+    PROJECT_STATUS = (
+        (0, '待审核'),
+        (1, '审核通过'),
+        (2, '驳回'),
+    )
+
+    project = models.ForeignKey(Project, verbose_name='项目', help_text='项目', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(UserProfile, verbose_name='成员', help_text='成员', on_delete=models.CASCADE)
+    status = models.IntegerField('状态', default=0, choices=PROJECT_STATUS)
+    reject_reason = models.TextField('驳回原因', help_text='驳回原因', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = verbose_name = '审核状态'

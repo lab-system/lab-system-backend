@@ -58,7 +58,11 @@ urlpatterns = [
     # app路由
     path('users/', include('users.urls')),
 
-    path('projects/', include('project.urls'))
+    path('projects/', include('project.urls')),
+
+    path('goods/', include('goods.urls')),
+
+    path('reports/', include('reports.urls'))
 
 ]
 

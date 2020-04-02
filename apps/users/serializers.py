@@ -185,8 +185,8 @@ class UserSerializer(serializers.ModelSerializer):
         username = attrs["username"]
         email = attrs["email"]
         phone = attrs["phone"]
-        if not re.search('({})'.format('*'), email): raise serializers.ValidationError(
-            "邮箱填写错误，只允许{}后缀的邮箱".format('*'))
+        # if not re.search('({})'.format('*'), email): raise serializers.ValidationError(
+        #     "邮箱填写错误，只允许{}后缀的邮箱".format('*'))
         if not is_valid_mobile_phone(phone): raise serializers.ValidationError("手机号非法")
         if User.objects.filter(email=email).exclude(username=username).count(): raise serializers.ValidationError("邮箱已经存在")
         return attrs
