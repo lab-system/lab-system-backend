@@ -14,4 +14,4 @@ class GoodBorrowAdmin(object):
 
 
 xadmin.site.register(Good, GoodAdmin)
-
+xadmin.site.register(GoodBorrow, GoodBorrowAdmin)
