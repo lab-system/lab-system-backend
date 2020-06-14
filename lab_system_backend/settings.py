@@ -58,6 +58,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
 ]
+# 自动注册
+# 获取app的路由值，在urls文件中使用
+app_dir = os.path.join(BASE_DIR, 'apps')
+APPS = os.listdir(app_dir)
+if '__init__.py' in APPS:
+    APPS.remove('__init__.py')
+if 'utils' in APPS:
+    APPS.remove('utils')
+if '__pycache__' in APPS:
+    APPS.remove('__pycache__')
+print('APPS', APPS)
+# INSTALLED_APPS.extend(['{}'.format(row) for row in APPS])
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -79,7 +91,7 @@ ROOT_URLCONF = 'lab_system_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'dist')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -153,9 +165,12 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+# 部署使用,直接到dist/static即可，这样前端访问时不丢失静态文件
+# STATIC_ROOT = os.path.join(BASE_DIR, "dist/static")
+
+# 部署注释掉
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    # os.path.join(BASE_DIR, "../lab-system-frontend/dist/static"),
+    os.path.join(BASE_DIR, "dist/static"),
 ]
 
 MEDIA_URL = "/media/"
