@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'goods',
     'reports',
     'attendence',
+    'article',
     'rest_framework',
     'rest_framework.authtoken',
     'xadmin',
@@ -68,7 +69,6 @@ if 'utils' in APPS:
     APPS.remove('utils')
 if '__pycache__' in APPS:
     APPS.remove('__pycache__')
-print('APPS', APPS)
 # INSTALLED_APPS.extend(['{}'.format(row) for row in APPS])
 
 MIDDLEWARE = [
@@ -206,7 +206,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
 }
 
-# 与drf的jwt相关的设置
+# 与drf的jwt相关的   设置
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=6000),   # 有效时间
     'JWT_AUTH_HEADER_PREFIX': 'JWT',                         # token前缀，需要与前端保持一致

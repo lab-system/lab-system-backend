@@ -55,17 +55,6 @@ urlpatterns = [
     # 首页
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
 
-    # # app路由
-    # path('users/', include('users.urls')),
-    #
-    # path('projects/', include('project.urls')),
-    #
-    # path('goods/', include('goods.urls')),
-    #
-    # path('reports/', include('reports.urls')),
-    #
-    # path('attendences/', include('attendence.urls'))
-
 ]
 #自动添加路由
 urls = [path('api/{}/'.format(app),  include('{}.urls'.format(app))) for app in settings.APPS]

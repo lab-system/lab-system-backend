@@ -15,7 +15,7 @@ class DefaultPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class ProJectViewset(viewsets.ModelViewSet):
+class ProJectViewSet(viewsets.ModelViewSet):
     """
     list:
         项目列表
