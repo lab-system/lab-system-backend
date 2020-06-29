@@ -5,6 +5,7 @@ from django.db import models
 from users.models import UserProfile
 from utils.custom_base_model import BaseModel
 from DjangoUeditor.models import UEditorField
+from django.template.defaultfilters import striptags
 
 
 # 图片上传路径
@@ -72,4 +73,3 @@ class Article(BaseModel):
 
     def __str__(self):
         return self.title
-

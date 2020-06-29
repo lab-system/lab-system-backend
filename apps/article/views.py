@@ -14,7 +14,7 @@ class DefaultPagination(PageNumberPagination):
 
 class ArticleViewSet(viewsets.ModelViewSet):
     """
-    项目和成员对应表
+    文章
     """
     queryset = Article.objects.filter(is_deleted=0).all()
     serializer_class = ArticleSerializer
@@ -22,7 +22,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     """
-    项目和成员对应表
+    分类
     """
     queryset = Category.objects.filter(is_deleted=0).all()
     serializer_class = CategorySerializer
@@ -30,7 +30,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class TagViewSet(viewsets.ModelViewSet):
     """
-    项目和成员对应表
+    标签
     """
     queryset = Tag.objects.filter(is_deleted=0).all()
     serializer_class = TagSerializer
