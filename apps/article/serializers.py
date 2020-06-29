@@ -17,7 +17,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     """
-    文章
+    分类
     """
 
     class Meta:
@@ -27,7 +27,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class TagSerializer(serializers.ModelSerializer):
     """
-    文章
+    标签
     """
 
     class Meta:

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'reports',
     'attendence',
     'article',
+    'members',
     'rest_framework',
     'rest_framework.authtoken',
     'xadmin',
