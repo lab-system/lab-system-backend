@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
@@ -18,6 +19,9 @@ class MemberViewSet(viewsets.ModelViewSet):
     """
     queryset = Member.objects.filter(is_deleted=0).all()
     serializer_class = MemberSerializer
+
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('category',)  # 筛选
 
 
 class ClassificationViewSet(viewsets.ModelViewSet):

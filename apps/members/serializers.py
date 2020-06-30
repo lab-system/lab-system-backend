@@ -20,8 +20,6 @@ class MemberSerializer(serializers.ModelSerializer):
     实验室成员
     """
 
-    classification = ClassificationSerializer(read_only=True)
-
     class Meta:
         model = Member
         fields = '__all__'
