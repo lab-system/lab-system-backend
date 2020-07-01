@@ -210,9 +210,8 @@ def UploadFile(request):
         # 'url': urljoin(USettings.gSettings.MEDIA_URL, OutputPathFormat),
         # todo：上边是不加域名
         # todo：下边是加上ip和端口号，但是部署的时候需要改成后端的端口号，如果有静态文件服务器，直接改成静态的域名
-        #'url': request.scheme + '://' + request.META['HTTP_HOST'] + urljoin(USettings.gSettings.MEDIA_URL, OutputPathFormat), # 上传路径加上域名
-        'url': request.scheme + '://' + '115.28.209.97:8000' + urljoin(USettings.gSettings.MEDIA_URL,
-                                                                            OutputPathFormat),  # 上传路径加上域名
+        'url': request.scheme + '://' + request.META['HTTP_HOST'] + urljoin(USettings.gSettings.MEDIA_URL, OutputPathFormat), # 上传路径加上域名
+        # 'url': request.scheme + '://' + '115.28.209.97:8000' + urljoin(USettings.gSettings.MEDIA_URL, OutputPathFormat),  # 上传路径加上域名
         # 原始文件名
         'original': upload_file_name,
         'type': upload_original_ext,

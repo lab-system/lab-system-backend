@@ -9,6 +9,13 @@ class ArticleSerializer(serializers.ModelSerializer):
     """
     文章
     """
+    firstImg = serializers.CharField(label='文章图片', help_text='文章图片', required=False)
+
+    def to_representation(self, instance):
+        self.firstImg = instance.get_content_img_url
+        instance.firstImg = self.firstImg
+        ret = super().to_representation(instance)
+        return ret
 
     class Meta:
         model = Article
