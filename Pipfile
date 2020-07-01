@@ -31,6 +31,7 @@ drf-extensions = "*"
 django-imagekit = "==4.0.2"
 django-ipware = "==2.1.0"
 itsdangerous = "==1.1.0"
+faker = "*"
 
 [requires]
 python_version = "3.7"
