@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
+from article.filters import ArticleFilter
 from article.models import Article, Tag, Category
 from article.serializers import ArticleSerializer, CategorySerializer, TagSerializer
 
@@ -21,7 +22,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
 
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('category', 'tags') #筛选
+    # todo: 以下两种过滤方式都可以
+    filter_class = ArticleFilter
+    # filter_fields = ('category__name', 'tags__name') #筛选
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 
+from members.filters import MemberFilter
 from members.models import Member, Classification
 from members.serializers import MemberSerializer, ClassificationSerializer
 
@@ -21,7 +22,8 @@ class MemberViewSet(viewsets.ModelViewSet):
     serializer_class = MemberSerializer
 
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('category',)  # 筛选
+    filter_class = MemberFilter
+    filter_fields = ('category_name',)  # 筛选
 
 
 class ClassificationViewSet(viewsets.ModelViewSet):

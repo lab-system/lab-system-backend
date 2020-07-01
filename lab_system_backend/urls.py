@@ -15,6 +15,7 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.conf import settings
+from django.conf.global_settings import STATIC_ROOT
 from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.views.static import serve
@@ -35,6 +36,8 @@ urlpatterns = [
     path('ueditor/', include('DjangoUeditor.urls')),
     # 处理图片显示的url,使用Django自带serve,传入参数告诉它去哪个路径找，我们有配置好的路径MEDIAROOT
     path('media/<path:path>', serve, {'document_root': MEDIA_ROOT}),
+
+    path('static/<path:path>', serve, {'document_root': STATIC_ROOT}),
 
     # 自动化文档
     path('docs/', include_docs_urls(title='实验室管理系统文档')),

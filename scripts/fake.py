@@ -95,9 +95,9 @@ if __name__ == '__main__': # 可运行脚本文件
             content='\n\n'.join(fake.paragraphs(10)), # markdown的分段是两个回车符
             create_time=create_time,
             category=cate,
+            tags=tag,
             author=UserProfile.objects.first(),
         )
-        post.tags.add(tag)
         post.save()
 
     # 创建成员

@@ -50,8 +50,8 @@ class Article(BaseModel):
 
     # 一对多
     category = models.ForeignKey(Category, verbose_name='分类', on_delete=models.CASCADE)
-    # 多对多
-    tags = models.ManyToManyField(Tag, verbose_name='标签', blank=True)
+    # 一对多
+    tags = models.ForeignKey(Tag, verbose_name='标签', null=True, blank=True, on_delete=models.CASCADE)
 
     # 文章作者
     author = models.ForeignKey(UserProfile, verbose_name='作者', on_delete=models.CASCADE)
