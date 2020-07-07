@@ -19,6 +19,7 @@ class MemberSerializer(serializers.ModelSerializer):
     """
     实验室成员
     """
+    category_name = serializers.CharField(label='成员分类', help_text='成员分类', required=False, source='category.name')
 
     class Meta:
         model = Member
