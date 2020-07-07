@@ -199,8 +199,8 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         # 'anon': '3/minute',         #每分钟可以请求两次
         # 'user': '5/minute',         #每分钟可以请求五次
-        'anon': '100/day',
-        'user': '1000/day'
+        'anon': '1000/day',
+        'user': '10000/day'
     },
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
     # 访问url：localhost：8000/docs/时报错，需要添加此条配置
