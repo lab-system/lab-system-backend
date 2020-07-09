@@ -60,6 +60,8 @@ class Article(BaseModel):
     # 统计文章阅读量
     views = models.PositiveIntegerField(default=0)
 
+    article_id = models.AutoField('索引', help_text='索引', primary_key=True)
+
     class Meta:
         verbose_name = "文章"
         verbose_name_plural = verbose_name

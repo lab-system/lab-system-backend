@@ -53,6 +53,7 @@ class Member(BaseModel):
                                  default='avatar/default.jpg', processors=[ResizeToFill(120, 120)],
                                  format='JPEG', options={'quality': 60}, null=True, blank=True)
     introduction = models.TextField('介绍', help_text='介绍', null=True, blank=True)
+    member_id = models.AutoField('索引', help_text='索引', primary_key=True)
 
     class Meta:
         verbose_name = "科研队伍"
