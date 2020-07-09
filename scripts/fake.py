@@ -92,7 +92,8 @@ if __name__ == '__main__': # 可运行脚本文件
                                              tzinfo=timezone.get_current_timezone()) # 时间范围1年前， 现在， 时区
         post = Article.objects.create(
             title=fake.sentence().rstrip('.'),   # 每段结尾用.分割
-            content='\n\n'.join(fake.paragraphs(10)), # markdown的分段是两个回车符
+            # content='\n\n'.join(fake.paragraphs(10)), # markdown的分段是两个回车符
+            content=fake.text(max_nb_chars=600),
             create_time=create_time,
             category=cate,
             tags=tag,
