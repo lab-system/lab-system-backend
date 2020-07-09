@@ -85,14 +85,17 @@ if __name__ == '__main__': # 可运行脚本文件
     # 使用fake自动创建100篇文章
     print('create some faked posts published within the past year')
     fake = faker.Faker('zh_CN') # 默认是英文，现在是汉语
+    article_id = 0
     for _ in range(100):
         tag = Tag.objects.order_by('?').first() # 随机排序标签
         cate = Category.objects.order_by('?').first() # 分配随机分类
         create_time = fake.date_time_between(start_date='-1y', end_date="now",
                                              tzinfo=timezone.get_current_timezone()) # 时间范围1年前， 现在， 时区
+        article_id += 1
         post = Article.objects.create(
             title=fake.sentence().rstrip('.'),   # 每段结尾用.分割
             # content='\n\n'.join(fake.paragraphs(10)), # markdown的分段是两个回车符
+            article_id=article_id,
             content=fake.text(max_nb_chars=600),
             create_time=create_time,
             category=cate,
@@ -103,10 +106,12 @@ if __name__ == '__main__': # 可运行脚本文件
 
     # 创建成员
     print('create some members')
+    member_id = 0
     for _ in range(20):
         classify = Classification.objects.order_by('?').first()
         create_time = fake.date_time_between(start_date='-1y', end_date="now",
                                              tzinfo=timezone.get_current_timezone())  # 时间范围1年前， 现在， 时区
+        member_id += 1
         member = Member.objects.create(
             name=fake.name(),
             birthday=fake.date_object(),
@@ -115,7 +120,8 @@ if __name__ == '__main__': # 可运行脚本文件
             member_type='student',
             category=classify,
             introduction=fake.paragraphs(10),
-            create_time=create_time
+            create_time=create_time,
+            member_id=member_id
         )
         member.save()
 

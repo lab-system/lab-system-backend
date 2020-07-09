@@ -53,7 +53,8 @@ class Member(BaseModel):
                                  default='avatar/default.jpg', processors=[ResizeToFill(120, 120)],
                                  format='JPEG', options={'quality': 60}, null=True, blank=True)
     introduction = models.TextField('介绍', help_text='介绍', null=True, blank=True)
-    member_id = models.AutoField('索引', help_text='索引', primary_key=True)
+    # member_id = models.AutoField('索引', help_text='索引', primary_key=True)
+    member_id = models.IntegerField('索引', help_text='索引', default=0)
 
     class Meta:
         verbose_name = "科研队伍"
@@ -63,3 +64,7 @@ class Member(BaseModel):
 
     def __str__(self):
         return self.name
+
+    # def save(self, *args, **kwargs):
+    #     self.member_id += 1
+    #     super().save(*args, **kwargs)

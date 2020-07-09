@@ -60,7 +60,8 @@ class Article(BaseModel):
     # 统计文章阅读量
     views = models.PositiveIntegerField(default=0)
 
-    article_id = models.AutoField('索引', help_text='索引', primary_key=True)
+    # article_id = models.AutoField('索引', help_text='索引', primary_key=True)
+    article_id = models.IntegerField('索引', help_text='索引', default=0)
 
     class Meta:
         verbose_name = "文章"
@@ -74,9 +75,12 @@ class Article(BaseModel):
         self.views += 1
         self.save(update_fields=['views'])
 
+    # def save(self, *args, **kwargs):
+    #     self.article_id += 1
+    #     super().save(*args, **kwargs)
+
     # # 重写父类的save逻辑，在每次更新时，自动填写更新时间
     # def save(self, *args, **kwargs):
-    #     self.content.
     #
     #     # 如果摘要没有手动输入，自动获取前54个字符
     #     if not self.excerpt:
